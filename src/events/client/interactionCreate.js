@@ -6,13 +6,28 @@ module.exports = {
       const { commandName } = interaction;
       const command = commands.get(commandName);
       if (!command) return;
-      console.log(command.name)
+      console.log(command.name);
       try {
         await command.execute(interaction, client);
       } catch (error) {
         console.error(error);
         await interaction.reply({
           content: "There was an error while executing this command!",
+          ephemeral: true,
+        });
+      }
+    } else if (interaction.isButton()) {
+      const { buttons } = client;
+      const { customId } = interaction;
+      const button = buttons.get(customId);
+      if (!button) return new Error("Button not found");
+
+      try {
+        await button.execute(interaction, client);
+      } catch (error) {
+        console.error(error);
+        await interaction.reply({
+          content: "There was an error while executing this button!",
           ephemeral: true,
         });
       }
