@@ -10,9 +10,9 @@ module.exports = {
     .setDescription("Return a button"),
   async execute(interaction, client) {
     const button = new ButtonBuilder()
-    
+
       .setLabel("Subscribe to FusionTerror")
-      .setStyle(ButtonStyle.Primary)
+      .setStyle(ButtonStyle.Link)
       .setURL("https://youtube.com/fusionterror");
 
     const row = new ActionRowBuilder().addComponents(button);
